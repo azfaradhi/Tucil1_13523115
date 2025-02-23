@@ -14,7 +14,7 @@ The key components of IQ Puzzler Pro include:
 - **Blocks/Pieces** – These are the puzzle pieces used to fill the board. Each block has a unique shape, and all blocks must be used to complete the puzzle.
 
 ## Gameplay
-The game starts with an empty board. Players place puzzle blocks in such a way that no blocks overlap (except in 3D cases). Each puzzle block can be rotated and mirrored. The puzzle is considered solved only when the board is completely filled and all puzzle blocks have been placed correctly.
+The game starts with an empty board. Players place puzzle blocks in such a way that no blocks overlap. Each puzzle block can be rotated and mirrored. The puzzle is considered solved only when the board is completely filled and all puzzle blocks have been placed correctly.
 
 
 ## How To Run
