@@ -1,13 +1,12 @@
 package placingpuzzle;
 import board.Board;
-import puzzlepieces.Piece;
-import java.io.*;
-import java.util.*;
 import generateimage.GenerateImage;
+import java.util.*;
+import puzzlepieces.Piece;
 
 public class PlacingPuzzle {
-    private Board board;
-    private List<Piece> pieces;
+    private final Board board;
+    private final List<Piece> pieces;
 
     public PlacingPuzzle(Board board, List<Piece> pieces) {
         this.board = board;
