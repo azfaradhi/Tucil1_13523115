@@ -1,15 +1,8 @@
 package board;
 
-import puzzlepieces.Piece;
-import java.util.*;
-import java.io.*;
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-
 public class Board {
-    private int row;
-    private int col;
+    private final int row;
+    private final int col;
     public char[][] board;
     public String[][] color;
 
