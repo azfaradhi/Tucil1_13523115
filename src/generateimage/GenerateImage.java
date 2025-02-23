@@ -1,15 +1,15 @@
 package generateimage;
-import javax.imageio.ImageIO;
+import board.Board;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
-import java.awt.image.BufferedImage;
-import board.Board;
+import javax.imageio.ImageIO;
 
 public class GenerateImage {
     String GREEN = "\u001B[32m";
     String RESET = "\u001B[0m";
-    private int size = 50;
+    private final int size = 50;
     private static final Map<String, Color> ansiColorMap = initColorMap();
     private static Map<String, Color> initColorMap() {
         Map<String, Color> map = new HashMap<>();
@@ -62,33 +62,18 @@ public class GenerateImage {
                     Color cellColor = ansiColorMap.getOrDefault(colorCode, Color.WHITE);
                     
                     g2d.setColor(cellColor);
-                    g2d.fillRect(
-                        j * size,
-                        i * size,
-                        size,
-                        size
-                    );
-                    
+                    g2d.fillRect(j * size, i * size, size,size);
                     g2d.setColor(new Color(60, 60, 60));
-                    g2d.drawRect(
-                        j * size,
-                        i * size,
-                        size,
-                        size
-                    );
-
+                    g2d.drawRect(j * size,i * size,size,size);
                 }
             }
         }
-        
         g2d.dispose();
         
         try {
             ImageIO.write(image, "PNG", new File(outputPath));
-            System.out.println(GREEN + "Result image saved to: " + outputPath + RESET);
         } catch (IOException e) {
             System.out.println();
         }
     }
-
 }
