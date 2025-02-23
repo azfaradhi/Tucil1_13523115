@@ -3,6 +3,7 @@ import board.Board;
 import puzzlepieces.Piece;
 import java.io.*;
 import java.util.*;
+import generateimage.GenerateImage;
 
 public class PlacingPuzzle {
     private Board board;
@@ -86,26 +87,34 @@ public class PlacingPuzzle {
                     }
                 }
             }
+            String RESET = "\u001B[0m";
+            String GREEN = "\u001B[32m";
+            String RED = "\u001B[31m";
 
-            System.out.println("Solusi ditemukan!");
+            System.out.println(GREEN + "Problem Solved!" + RESET);
+            System.out.println();
             this.board.printBoard();
-            System.out.println("Jumlah percobaan: " + counter);
+            System.out.println();
+            System.out.println(GREEN + "Attempts: " + RESET + RED + counter + RESET);
+            
+            GenerateImage generateImage = new GenerateImage();
+            generateImage.GenerateImage(this.board, "test/output/result.png");
             return true;
         }
-        for (int i = 0; i < this.board.getBoardRow(); i++){
-            for (int j = 0; j < this.board.getBoardCol(); j++){
+        for (int i = 0; i < board.getBoardRow(); i++){
+            for (int j = 0; j < board.getBoardCol(); j++){
                 for (int k = 0; k < 4; k++){
                     for (int l = 0; l < 2; l++){
                         counter++;
-                        if (isValidPlacement(this.board, this.pieces.get(pieceIdx), i, j)){
-                            placingPieceToBoard(i, j, this.pieces.get(pieceIdx));
-                            // this.board.printBoard();
+                        if (isValidPlacement(board, pieces.get(pieceIdx),i,j)){
+                            placingPieceToBoard(i,j,pieces.get(pieceIdx));
 
-                            if (mainSolvingPuzzle(pieceIdx+1,counter)){
+
+                            if (mainSolvingPuzzle(pieceIdx+1, counter)){
                                 return true;
                             }
 
-                            removingPieceFromBoard(i, j, pieces.get(pieceIdx));
+                            removingPieceFromBoard(i,j,pieces.get(pieceIdx));
                         }
                         pieces.get(pieceIdx).mirrorPiece();
                     }
