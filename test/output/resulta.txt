@@ -1,0 +1,6 @@
+Solution: 
+ABBCC
+AABDC
+EEDDG
+EEFFG
+EFFFG

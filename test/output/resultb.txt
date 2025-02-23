@@ -1,0 +1,6 @@
+Solution: 
+   A   
+ AAABB 
+CCCCBBB
+ CEEE  
+  E    
