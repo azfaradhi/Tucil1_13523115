@@ -3,10 +3,22 @@ package readsave;
 import java.io.*;
 import java.util.*;
 import puzzlepieces.Piece;
-import board.Board;
 
 public class ReadFromFile {
-    public List<String> readFile(String filename){
+    public List<String> readFileFromFile(File file) {
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                lines.add(currentLine);
+            }
+        } catch (IOException e) {
+            return null;
+        }
+        return lines;
+    }
+
+    public List<String> readFileFromString(String filename){
         List<String> lines = new ArrayList<>();
         String filenamewithfolder = "test/input/" + filename;
         try {
@@ -35,7 +47,7 @@ public class ReadFromFile {
         else if ("CUSTOM".equals(type)){
             inttype = 1;
         }
-        else if ("PYRAMID".equals(type)){
+        else {
             inttype = 2;
         }
         result.add(rowBoard);
@@ -50,18 +62,24 @@ public class ReadFromFile {
         int colBoard = Integer.parseInt(lines.get(0).split(" ")[1]);
         char[][] board = new char[rowBoard][colBoard];
         int idx = 2;
-        for (int i = 0; i < rowBoard; i++){
-            String temp = lines.get(idx+i);
-            for (int j = 0; j <colBoard; j++){
-                if (temp.charAt(j) == '.'){
-                    board[i][j] = '#';
-                }
-                else if (temp.charAt(j) == 'X'){
-                    board[i][j] = '.';
+        try{
+            for (int i = 0; i < rowBoard; i++){
+                String temp = lines.get(idx+i);
+                for (int j = 0; j <colBoard; j++){
+                    if (temp.charAt(j) == '.'){
+                        board[i][j] = '#';
+                    }
+                    else if (temp.charAt(j) == 'X'){
+                        board[i][j] = '.';
+                    }
                 }
             }
+            return board;
         }
-        return board;
+        catch (IndexOutOfBoundsException e){
+            return null;
+        }
+
     }
 
     public List<Piece> makePieces(List<String> lines, int startLine){
@@ -98,14 +116,11 @@ public class ReadFromFile {
         List<Piece> pieces = new ArrayList<>();
 
         int maxLength = lines.size();
-        // System.out.println("Max length: ");
-        // System.out.println(maxLength);
         int idx = startLine;
         tempLine = lines.get(idx);
         Character currentChar;
         int i = 0;
         while (idx < maxLength){
-            // System.out.println("Masuk while");
             int idxtemp = 0;
             while (true){
                 if (tempLine.charAt(idxtemp) == ' '){
@@ -116,14 +131,10 @@ public class ReadFromFile {
                     break;
                 }
             }
-            // System.out.println(currentChar);
             int longestRow = 1;
             int longestCol = tempLine.length();
             int savedidx = idx;
-            // System.out.printf("sebelum masuk while: ");
             while (true){
-                // System.out.printf("idx: ");
-                // System.out.println(idx);
                 if (idx == maxLength-1){
                     idx++;
                     break;
@@ -150,7 +161,6 @@ public class ReadFromFile {
                     }
                     else{
                         isStillSameCharacter = false;
-                        System.out.println(tempLine.charAt(endChar));
                         break;
                     }
                 }
@@ -165,11 +175,6 @@ public class ReadFromFile {
                 longestRow++;
             }
             int lastidx = idx;
-            // System.out.println("Dimensi pieces");
-            // System.out.println(longestRow);
-            // System.out.println(longestCol);
-            // System.out.println("done");
-            // System.out.println(lastidx);
             boolean[][] intoPiece = new boolean[longestRow][longestCol];
             for (int j = savedidx; j < lastidx; j++){
                 String temp = lines.get(j);
@@ -185,20 +190,6 @@ public class ReadFromFile {
             Piece newPiece = new Piece(intoPiece, longestRow, longestCol, currentChar, colors[i]);
             pieces.add(newPiece);
             i++;
-
-            // if ((idx < maxLength) && (i == totalPieces)){
-            //     System.out.println("ghrer");
-            //     try{
-            //         lines.get(idx);
-            //     }
-            //     catch (IndexOutOfBoundsException e){
-            //         break;
-            //     }
-            //     break;
-            // }
-            // System.out.printf("Index terakhir: ");
-            // System.out.println(idx);
-
         }
         return pieces;
     }
