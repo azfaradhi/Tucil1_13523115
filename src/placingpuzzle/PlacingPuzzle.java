@@ -3,6 +3,9 @@ import board.Board;
 import generateimage.GenerateImage;
 import java.util.*;
 import puzzlepieces.Piece;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class PlacingPuzzle {
     private final Board board;
@@ -97,7 +100,11 @@ public class PlacingPuzzle {
             System.out.println(GREEN + "Attempts: " + RESET + RED + counter + RESET);
             
             GenerateImage generateImage = new GenerateImage();
-            generateImage.GenerateImage(this.board, "test/output/result.png");
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+            String stringTime = now.format(formatter);
+            String saveTo = "test/output/result" + stringTime + ".png";
+            generateImage.GenerateImage(this.board, saveTo);
             return true;
         }
         for (int i = 0; i < board.getBoardRow(); i++){
