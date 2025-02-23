@@ -8,7 +8,7 @@ public class SaveToFile {
         try (FileWriter writer = new FileWriter("test/output/" + filename);
             BufferedWriter bw = new BufferedWriter(writer))
             {
-                bw.write("Konfigurasi yang memungkinkan adalah: ");
+                bw.write("Solution: ");
                 bw.newLine();
                 for (int i = 0; i < board.getBoardRow(); i++){
                     for (int j = 0; j < board.getBoardCol(); j++){
