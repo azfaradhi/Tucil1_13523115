@@ -5,7 +5,7 @@ import board.Board;
 public class SaveToFile {
 
     public static void saveToFile(String filename, Board board){
-        try (FileWriter writer = new FileWriter("test/output/" + filename);
+        try (FileWriter writer = new FileWriter("test/output/" + filename + ".txt");
             BufferedWriter bw = new BufferedWriter(writer))
             {
                 bw.write("Solution: ");
