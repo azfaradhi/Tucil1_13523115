@@ -8,7 +8,7 @@ import board.Board;
 public class ReadFromFile {
     public List<String> readFile(String filename){
         List<String> lines = new ArrayList<>();
-        String filenamewithfolder = "test/" + filename;
+        String filenamewithfolder = "test/input/" + filename;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filenamewithfolder));
             String currentline;
@@ -17,7 +17,7 @@ public class ReadFromFile {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
         return lines;
     }
@@ -68,9 +68,7 @@ public class ReadFromFile {
 
 
         String[] colors = {
-            "\u001B[30m",
             "\u001B[31m",
-            "\u001B[32m",
             "\u001B[33m",
             "\u001B[34m",
             "\u001B[35m",
@@ -92,6 +90,8 @@ public class ReadFromFile {
             "\u001B[45m",
             "\u001B[46m",
             "\u001B[47m",
+            "\u001B[48m",
+            "\u001B[49m",
         };
         int totalPieces = Integer.parseInt(lines.get(0).split(" ")[2]);
         String tempLine;
